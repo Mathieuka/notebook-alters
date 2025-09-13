@@ -4,4 +4,10 @@
   <RouterView />
 </template>
 
-<style scoped></style>
+<!--Global CSS-->
+<style>
+.tiptap {
+  border: 2px solid black;
+  border-radius: 4px;
+}
+</style>
