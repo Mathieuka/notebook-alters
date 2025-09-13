@@ -2,6 +2,7 @@
   "version": "5",
   "specifiers": {
     "jsr:@hono/hono@^4.9.7": "4.9.7",
+    "npm:@electric-sql/client@*": "1.0.10",
     "npm:@types/node@*": "24.2.0"
   },
   "jsr": {
@@ -10,6 +11,23 @@
     }
   },
   "npm": {
+    "@electric-sql/client@1.0.10": {
+      "integrity": "sha512-KcP6R2OGiruxbhAa0wMGiRIfpXDQQ8vznBmn34kG/UJ11sqA4NQBhoPhSsKkCPs5EKc2DoS6bcnqLkIHFdxmvg==",
+      "dependencies": [
+        "@microsoft/fetch-event-source"
+      ],
+      "optionalDependencies": [
+        "@rollup/rollup-darwin-arm64"
+      ]
+    },
+    "@microsoft/fetch-event-source@2.0.1": {
+      "integrity": "sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA=="
+    },
+    "@rollup/rollup-darwin-arm64@4.50.1": {
+      "integrity": "sha512-xc6i2AuWh++oGi4ylOFPmzJOEeAa2lJeGUGb4MudOtgfyyjr4UPNK+eEWTPLvmPJIY/pgw6ssFIox23SyrkkJw==",
+      "os": ["darwin"],
+      "cpu": ["arm64"]
+    },
     "@types/node@24.2.0": {
       "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
       "dependencies": [
@@ -22,7 +40,8 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@hono/hono@^4.9.7"
+      "jsr:@hono/hono@^4.9.7",
+      "npm:@electric-sql/client@*"
     ]
   }
 }
