@@ -1,9 +1,12 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.use(cors());
 
-Deno.serve(app.fetch)
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
+
+Deno.serve(app.fetch);

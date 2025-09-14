@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import { onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
+
+const content = ref(`<p>Hello</p>`)
 
 const editor = useEditor({
-  content: "<p>I'm running Tiptap with Vue.js! 🎉</p>",
+  content: content.value,
   extensions: [StarterKit],
   autofocus: true,
+})
+
+watchEffect(() => {
+  editor.value?.commands.setContent(content.value)
+})
+
+onMounted(async () => {
+  const response = await fetch('http://localhost:8000')
+  const data = await response.text()
+  content.value = `<p>${data}</p>`
 })
 
 onUnmounted(() => {
