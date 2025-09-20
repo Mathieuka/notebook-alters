@@ -1,35 +1,19 @@
 <script setup lang="ts">
-// import { useEditor, EditorContent } from '@tiptap/vue-3'
-// import StarterKit from '@tiptap/starter-kit'
 import { onMounted, ref } from 'vue'
 
 const content = ref(``)
-
-// const editor = useEditor({
-//   content: content.value,
-//   extensions: [StarterKit],
-//   autofocus: true,
-// })
-
-// watchEffect(() => {
-//   editor.value?.commands.setContent(content.value)
-// })
 
 onMounted(async () => {
   const response = await fetch('http://localhost:8000')
   const data = await response.text()
   content.value = `<p>${data}</p>`
 })
-
-// onUnmounted(() => {
-//   editor.value?.destroy()
-// })
 </script>
 
 <template>
   <div class="container">
-    <!-- <editor-content :editor="editor" /> -->
-    <input type="text" />
+    <input class="title-input" />
+    <textarea class="content-input" />
     <div class="box-container">
       <div class="box">Value</div>
       <div class="box">Value</div>
@@ -47,25 +31,41 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid #ccc;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.2rem;
+}
+
+.title-input {
+  width: 10rem;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.content-input {
+  width: 25rem;
+  height: 5rem;
+  border: 1px solid #000;
   border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
 .box-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 600px;
-
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  gap: 10px;
+  border: 0.01rem solid #000;
+  border-radius: 0.1rem;
+  gap: 0.4rem;
+  padding: 0.3rem;
 }
 
 .box {
-  min-height: 100px;
+  min-height: 6rem;
   background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 0.02rem solid #000;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
 }
 </style>
