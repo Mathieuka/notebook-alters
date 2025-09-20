@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  notebook-db:
+    image: docker.io/postgres:16-alpine
+    container_name: notebook-db
+    environment:
+      POSTGRES_DB: notebook-dev
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "54321:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+      - /tmp
+    command:
+      - -c
+      - listen_addresses=*
+      - -c
+      - wal_level=logical
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  electric:
+    image: docker.io/electricsql/electric:latest
+    environment:
+      DATABASE_URL: postgresql://user:password@notebook-db:5432/notebook-dev?sslmode=disable
+      # Not suitable for production. Only use insecure mode in development or if you've otherwise secured the Electric API.
+      # See https://electric-sql.com/docs/guides/security
+      ELECTRIC_INSECURE: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      notebook-db:
+        condition: service_healthy
