@@ -3,7 +3,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
 
-const content = ref(`<p>Hello</p>`)
+const content = ref(``)
 
 const editor = useEditor({
   content: content.value,
