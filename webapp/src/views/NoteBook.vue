@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import TitleInput from '@/components/TitleInput.vue'
 import { onMounted, ref } from 'vue'
 
 const content = ref(``)
+
+const title = ref('')
+const subTitle = ref('')
+
+// watchEffect(() => {
+//   console.log(title.value)
+//   console.log(subTitle.value)
+// })
 
 onMounted(async () => {
   const response = await fetch('http://localhost:8000')
@@ -12,7 +21,7 @@ onMounted(async () => {
 
 <template>
   <div class="container">
-    <input class="title-input" />
+    <TitleInput v-model:title="title" v-model:subTitle="subTitle" />
     <textarea class="content-input" />
     <div class="box-container">
       <div class="box">Value</div>
@@ -33,13 +42,6 @@ onMounted(async () => {
   align-items: center;
   border: 0.1rem solid #ccc;
   border-radius: 0.2rem;
-}
-
-.title-input {
-  width: 10rem;
-  border: 1px solid #000;
-  border-radius: 0.2rem;
-  margin-bottom: 1rem;
 }
 
 .content-input {
